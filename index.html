@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zeke's Tetris Arcade</title>
+  <title>Zeke Tetris Arcade</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&family=Bungee+Shade&display=swap" rel="stylesheet">
   <style>
     body {
@@ -71,6 +71,7 @@
       font-family: 'Bungee Shade', cursive;
       font-size: 1.1rem;
     }
+
     .upgrade-box {
       background: linear-gradient(135deg, #2c3e50, #3498db);
       border: 2px solid #00ffff;
@@ -78,11 +79,6 @@
       padding: 12px;
       margin-bottom: 15px;
       box-shadow: 0 4px 12px rgba(0,255,255,0.2);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .upgrade-box:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 6px 18px rgba(0,255,255,0.4);
     }
     .upgrade-box button {
       background-color: #ff007f;
@@ -107,72 +103,6 @@
       color: #f1c40f;
     }
 
-    .upgrade-box-win {
-      background: linear-gradient(135deg, #2c3e50, #3498db);
-      border: 2px solid #00dddd;
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 12px rgba(0,105,155,0.2);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .upgrade-box-win:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 6px 18px rgba(0,105,155,0.4);
-    }
-    .upgrade-box-win button {
-      background-color: #bb343c;
-      color: white;
-      border: none;
-      padding: 10px;
-      width: 100%;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: background 0.2s;
-    }
-    .upgrade-box-win button:hover {
-      background-color: #00ffff;
-      color: #3c3c3c;
-    }
-    .upgrade-box-win p {
-      margin: 8px 0 0 0;
-      font-size: 0.85rem;
-      text-align: right;
-      color: #b4c0af;
-    }
-
-    .rebirth-shop-box {
-      background: linear-gradient(135deg, #4b0082, #8a2be2);
-      border: 2px solid #ff00ff;
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 12px rgba(255,0,255,0.3);
-    }
-    .rebirth-shop-box button {
-      background-color: #ff00ff;
-      color: white;
-      border: none;
-      padding: 10px;
-      width: 100%;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-    .rebirth-shop-box button:hover {
-      background-color: #ffff00;
-      color: #1a1a1a;
-    }
-    .rebirth-shop-box p {
-      margin: 8px 0 0 0;
-      font-size: 0.85rem;
-      text-align: right;
-      color: #00ffff;
-    }
-
     .game-container {
       flex: 1;
       display: flex;
@@ -182,60 +112,43 @@
       padding: 20px;
       overflow-y: auto;
     }
-    #zeke {
-      width: 350px;
-      height: 350px;
-      cursor: pointer;
-      max-width: 100%;
-      border-radius: 50%;
-      box-shadow: 0 0 30px rgba(255,0,127,0.4);
-      transition: width 0.5s ease, height 0.5s ease;
-      object-fit: cover;
-    }
-    .win-image {
-      width: 550px !important;
-      height: 550px !important;
-      box-shadow: 0 0 60px rgba(0,255,255,0.8) !important;
-    }
-    .click-animation {
-      animation: pop 0.1s ease-out;
-    }
-    @keyframes pop {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-    #win-screen {
-      display: none;
+
+    /* Tetris Canvas Container */
+    #tetris-wrapper {
+      display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 15px;
+      background: #111;
+      border: 2px solid #ff007f;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 30px rgba(255,0,127,0.4);
     }
-    #win-screen h2 {
-      font-family: 'Rubik Glitch', cursive;
-      font-size: 3rem;
-      color: #00ffff;
-      margin: 0 0 10px 0;
-      text-shadow: 2px 2px #ff007f;
+    #tetrisCanvas {
+      background: #000;
+      border: 2px solid #00ffff;
+      box-shadow: 0 0 15px rgba(0,255,255,0.3);
+      display: block;
     }
-    #win-screen button {
-      background-color: #00ff00;
-      color: #1a1a1a;
+    .tetris-btn {
+      background-color: #ff007f;
+      color: white;
       border: none;
-      padding: 12px 24px;
-      font-size: 1.2rem;
+      padding: 10px 20px;
+      margin-top: 15px;
+      border-radius: 8px;
       font-weight: bold;
-      border-radius: 10px;
       cursor: pointer;
-      box-shadow: 0 0 15px #00ff00;
+      font-size: 1rem;
+      transition: background 0.2s;
     }
-    #win-screen button:hover {
-      background-color: #fff;
-      color: #000;
+    .tetris-btn:hover {
+      background-color: #00ffff;
+      color: #1a1a1a;
     }
 
     /* =========================================
-       DISCREET ARCADE CSS 
+       DISCREET ARCADE CSS (Retained from template)
        ========================================= */
     #arcade-trigger {
       position: fixed;
@@ -257,63 +170,30 @@
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
       background: rgba(0, 0, 0, 0.8);
-      display: flex; align-items: center; justify-content: center;
+      display: none; align-items: center; justify-content: center;
       z-index: 1000;
     }
-
     .arcade-content {
       background: #111;
       border: 2px solid #ff007f;
       border-radius: 12px;
       padding: 20px;
-      width: 420px;
+      width: 350px;
       box-shadow: 0 0 30px rgba(255,0,127,0.5);
       text-align: center;
     }
-
     .arcade-header {
       display: flex; justify-content: space-between; align-items: center;
       margin-bottom: 15px;
       border-bottom: 1px solid #333;
       padding-bottom: 10px;
     }
-
-    .arcade-tabs {
-      display: flex; gap: 5px; margin-bottom: 15px; flex-wrap: wrap; justify-content: center;
-    }
-    .arcade-tabs button {
-      background: #222; border: 1px solid #00ffff; color: #fff;
-      padding: 5px 10px; cursor: pointer; border-radius: 4px; font-size: 11px;
-    }
-    .arcade-tabs button.active-tab {
-      background: #00ffff; color: #000; font-weight: bold;
-    }
-
-    .arcade-view { display: none; }
-    .arcade-start {
-      background: #ff007f; color: #fff; border: none; padding: 10px 20px;
-      border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 15px;
-    }
-    .arcade-start:hover { background: #00ffff; color: #000; }
-
-    /* Tetris Game Canvas container */
-    #tetris-container {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    #tetrisCanvas {
-      background: #000;
-      border: 2px solid #00ffff;
-      box-shadow: 0 0 15px rgba(0,255,255,0.3);
-    }
   </style>
 </head>
 <body>
 
   <div class="banner">
-    <h1>Zeke Clicker & Tetris</h1>
+    <h1>Zeke's Tetris</h1>
     <div class="live-stats">
       Score: <span id="stat-score">0</span><br>
       Lines: <span id="stat-lines">0</span>
@@ -322,138 +202,58 @@
 
   <div class="main-layout">
     <div class="left-sidebar">
-      <h3>Upgrades</h3>
+      <h3>Controls</h3>
       <div class="upgrade-box">
-        <button onclick="buyAutoClicker()">Auto Clicker</button>
-        <p>Cost: <span id="auto-cost">15</span></p>
-      </div>
-      <div class="upgrade-box">
-        <button onclick="buyMultiplier()">Multiplier</button>
-        <p>Cost: <span id="mult-cost">50</span></p>
+        <p style="text-align: left; color: #00ffff;">⬅ ➡ : Move Left/Right</p>
+        <p style="text-align: left; color: #00ffff;">⬆ : Rotate Piece</p>
+        <p style="text-align: left; color: #00ffff;">⬇ : Soft Drop</p>
       </div>
     </div>
 
     <div class="game-container">
-      <div id="win-screen">
-        <h2>YOU WIN!</h2>
-        <button onclick="resetGame()">Play Again</button>
+      <div id="tetris-wrapper">
+        <canvas id="tetrisCanvas" width="200" height="400"></canvas>
+        <button class="tetris-btn" onclick="startTetrisGame()">Start Game</button>
       </div>
-      <img id="zeke" src="zeke.jpg" alt="Zeke" onclick="clickZeke()" onerror="this.src='https://via.placeholder.com/350?text=Zeke'">
     </div>
 
     <div class="right-sidebar">
       <h3>Stats</h3>
-      <p>Clicks: <span id="click-count">0</span></p>
-      <p>Per Second: <span id="aps-count">0</span></p>
+      <p>High Score: <span id="stat-highscore">0</span></p>
+      <p>Level: <span id="stat-level">1</span></p>
     </div>
   </div>
 
   <!-- Discreet Arcade Button -->
-  <div id="arcade-trigger" onclick="toggleArcade(true)" title="Open Arcade">🎮</div>
+  <div id="arcade-trigger" onclick="toggleArcade(true)" title="Arcade Info">🎮</div>
 
   <!-- Arcade Modal -->
-  <div id="arcade-modal" style="display:none;">
+  <div id="arcade-modal">
     <div class="arcade-content">
       <div class="arcade-header">
-        <span style="color: #00ffff; font-family: 'Bungee Shade';">Zeke Tetris Arcade</span>
+        <span style="color: #00ffff; font-family: 'Bungee Shade';">Zeke Arcade</span>
         <button onclick="toggleArcade(false)" style="background:none; border:none; color:#ff007f; font-size:18px; cursor:pointer;">✖</button>
       </div>
-      <div class="arcade-tabs">
-        <button class="active-tab" onclick="switchGame('tetris')">Tetris</button>
-      </div>
-
-      <!-- Tetris View -->
-      <div id="view-tetris" class="arcade-view" style="display:block;">
-        <div id="tetris-container">
-          <canvas id="tetrisCanvas" width="200" height="400"></canvas>
-        </div>
-        <div style="margin-top: 10px; font-size: 12px; color: #aaa;">
-          Controls: Left/Right Arrows = Move | Up Arrow = Rotate | Down = Drop
-        </div>
-        <button class="arcade-start" onclick="startTetrisGame()">Start Tetris</button>
-      </div>
+      <p style="color: #ccc; font-size: 14px;">Welcome to Zeke Tetris! Clear lines to gain score and level up. Every block is made of Zeke.</p>
     </div>
   </div>
 
   <script>
-    // --- Main Clicker Game Logic ---
-    let score = 0;
-    let clicks = 0;
-    let autoClickers = 0;
-    let autoCost = 15;
-    let multiplier = 1;
-    let multCost = 50;
-
-    function clickZeke() {
-      score += multiplier;
-      clicks++;
-      updateDisplay();
-      
-      const zekeImg = document.getElementById('zeke');
-      zekeImg.classList.add('click-animation');
-      setTimeout(() => zekeImg.classList.remove('click-animation'), 100);
-    }
-
-    function buyAutoClicker() {
-      if (score >= autoCost) {
-        score -= autoCost;
-        autoClickers++;
-        autoCost = Math.floor(autoCost * 1.15);
-        updateDisplay();
-      }
-    }
-
-    function buyMultiplier() {
-      if (score >= multCost) {
-        score -= multCost;
-        multiplier++;
-        multCost = Math.floor(multCost * 2);
-        updateDisplay();
-      }
-    }
-
-    function updateDisplay() {
-      document.getElementById('stat-score').innerText = score;
-      document.getElementById('click-count').innerText = clicks;
-      document.getElementById('aps-count').innerText = autoClickers;
-      document.getElementById('auto-cost').innerText = autoCost;
-      document.getElementById('mult-cost').innerText = multCost;
-    }
-
-    // Auto-click loop
-    setInterval(() => {
-      if (autoClickers > 0) {
-        score += autoClickers * multiplier;
-        updateDisplay();
-      }
-    }, 1000);
-
-    // --- Arcade Modal Control ---
-    function toggleArcade(show) {
-      document.getElementById('arcade-modal').style.display = show ? 'flex' : 'none';
-      if (!show && tetrisInterval) {
-        clearInterval(tetrisInterval);
-        tetrisInterval = null;
-      }
-    }
-
-    function switchGame(gameName) {
-      if (tetrisInterval) clearInterval(tetrisInterval);
-      document.getElementById('view-tetris').style.display = 'block';
-    }
-
-    // --- Tetris Game Logic with zeke.jpg Blocks ---
     const canvas = document.getElementById('tetrisCanvas');
     const ctx = canvas.getContext('2d');
-    const BLOCK_SIZE = 20; // 10 cols * 20 = 200, 20 rows * 20 = 400
+    const BLOCK_SIZE = 20; 
     const ROWS = 20;
     const COLS = 10;
 
     let board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
     let tetrisInterval = null;
+    let score = 0;
     let totalLines = 0;
+    let highscore = 0;
+    let level = 1;
+    let dropInterval = 500;
 
-    // Load the zeke image for the blocks
+    // Load Zeke image for individual block segments
     const zekeBlockImg = new Image();
     zekeBlockImg.src = 'zeke.jpg';
 
@@ -506,12 +306,11 @@
     function drawImageBlock(x, y) {
       if (zekeBlockImg.complete && zekeBlockImg.naturalHeight !== 0) {
         ctx.drawImage(zekeBlockImg, x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-        // Inner border styling for grid distinctness
         ctx.strokeStyle = '#ff007f';
         ctx.lineWidth = 1;
         ctx.strokeRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
       } else {
-        // Fallback color block if image fails to load
+        // Fallback color block if image doesn't load
         ctx.fillStyle = '#00ffff';
         ctx.fillRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
         ctx.strokeStyle = '#111';
@@ -552,14 +351,24 @@
         board.splice(r, 1);
         board.unshift(Array(COLS).fill(0));
         linesCleared++;
-        r++; // check same row index again
+        r++; 
       }
       if (linesCleared > 0) {
         totalLines += linesCleared;
-        document.getElementById('stat-lines').innerText = totalLines;
-        score += linesCleared * 10 * multiplier;
-        updateDisplay();
+        score += linesCleared * 100 * level;
+        level = Math.floor(totalLines / 5) + 1;
+        
+        if (score > highscore) highscore = score;
+
+        updateStats();
+        adjustSpeed();
       }
+    }
+
+    function adjustSpeed() {
+      if (tetrisInterval) clearInterval(tetrisInterval);
+      dropInterval = Math.max(100, 500 - (level - 1) * 50);
+      tetrisInterval = setInterval(movePieceDown, dropInterval);
     }
 
     function movePieceDown() {
@@ -571,8 +380,14 @@
         currentPiece = createPiece();
         if (collide(currentPiece, 0, 0)) {
           // Game Over condition
+          clearInterval(tetrisInterval);
+          tetrisInterval = null;
+          alert("Game Over! Final Score: " + score);
           board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
-          alert("Game Over! Restarting Tetris...");
+          score = 0;
+          totalLines = 0;
+          level = 1;
+          updateStats();
         }
       }
       drawBoard();
@@ -580,13 +395,12 @@
 
     function rotatePiece() {
       const originalShape = currentPiece.shape;
-      // Transpose and reverse rows for rotation
       const rotated = currentPiece.shape[0].map((_, index) =>
         currentPiece.shape.map(row => row[index]).reverse()
       );
       currentPiece.shape = rotated;
       if (collide(currentPiece, 0, 0)) {
-        currentPiece.shape = originalShape; // revert if invalid position
+        currentPiece.shape = originalShape; 
       }
       drawBoard();
     }
@@ -594,29 +408,44 @@
     function startTetrisGame() {
       if (tetrisInterval) clearInterval(tetrisInterval);
       board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+      score = 0;
       totalLines = 0;
-      document.getElementById('stat-lines').innerText = totalLines;
+      level = 1;
+      updateStats();
       currentPiece = createPiece();
       drawBoard();
-      tetrisInterval = setInterval(movePieceDown, 500);
+      tetrisInterval = setInterval(movePieceDown, dropInterval);
     }
 
-    // Tetris keyboard controls
+    function updateStats() {
+      document.getElementById('stat-score').innerText = score;
+      document.getElementById('stat-lines').innerText = totalLines;
+      document.getElementById('stat-highscore').innerText = highscore;
+      document.getElementById('stat-level').innerText = level;
+    }
+
+    function toggleArcade(show) {
+      document.getElementById('arcade-modal').style.display = show ? 'flex' : 'none';
+    }
+
+    // Keyboard controls
     window.addEventListener('keydown', e => {
-      if (document.getElementById('arcade-modal').style.display === 'flex' && currentPiece) {
-        if (e.key === 'ArrowLeft' && !collide(currentPiece, -1, 0)) {
-          currentPiece.x--;
-          drawBoard();
-        } else if (e.key === 'ArrowRight' && !collide(currentPiece, 1, 0)) {
-          currentPiece.x++;
-          drawBoard();
-        } else if (e.key === 'ArrowDown') {
-          movePieceDown();
-        } else if (e.key === 'ArrowUp') {
-          rotatePiece();
-        }
+      if (!tetrisInterval) return; // Don't move if game hasn't started
+      if (e.key === 'ArrowLeft' && !collide(currentPiece, -1, 0)) {
+        currentPiece.x--;
+        drawBoard();
+      } else if (e.key === 'ArrowRight' && !collide(currentPiece, 1, 0)) {
+        currentPiece.x++;
+        drawBoard();
+      } else if (e.key === 'ArrowDown') {
+        movePieceDown();
+      } else if (e.key === 'ArrowUp') {
+        rotatePiece();
       }
     });
+
+    // Initial render setup
+    drawBoard();
   </script>
 </body>
 </html>
