@@ -375,6 +375,7 @@
     function movePieceDown() {
       if (!collide(currentPiece, 0, 1)) {
         currentPiece.y++;
+        movePieceDown();
       } else {
         mergePiece();
         clearLines();
