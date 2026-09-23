@@ -373,13 +373,16 @@
     }
 
     function quikDrop() {
+        let dropHeight = 0;
         while (!collide(currentPiece, 0, 1)) {
             currentPiece.y++;
+            dropHeight++;
         }
     
         mergePiece();
         clearLines();
         currentPiece = createPiece();
+        score += 20 * dropHeight;
     
         if (collide(currentPiece, 0, 0)) {
             clearInterval(tetrisInterval);
