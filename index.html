@@ -373,27 +373,28 @@
     }
 
     function quikDrop() {
-      if (!collide(currentPiece, 0, 1)) {
-        currentPiece.y++;
-        quikDrop();
-      } else {
+        while (!collide(currentPiece, 0, 1)) {
+            currentPiece.y++;
+        }
+    
         mergePiece();
         clearLines();
         currentPiece = createPiece();
+    
         if (collide(currentPiece, 0, 0)) {
-          // Game Over condition
-          clearInterval(tetrisInterval);
-          tetrisInterval = null;
-          alert("Game Over! Final Score: " + score);
-          board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
-          score = 0;
-          totalLines = 0;
-          level = 1;
-          updateStats();
+            clearInterval(tetrisInterval);
+            tetrisInterval = null;
+            alert("Game Over! Final Score: " + score);
+            board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+            score = 0;
+            totalLines = 0;
+            level = 1;
+            updateStats();
         }
-      }
-      drawBoard();
+    
+        drawBoard();
     }
+
 
     function movePieceDown() {
       if (!collide(currentPiece, 0, 1)) {
@@ -462,6 +463,7 @@
         currentPiece.x++;
         drawBoard();
       } else if (e.key === 'ArrowDown') {
+        // movePieceDown();
         quikDrop();
       } else if (e.key === 'ArrowUp') {
         rotatePiece();
