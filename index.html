@@ -312,7 +312,7 @@
     function drawImageBlock(x, y) {
       if (zekeBlockImg.complete && zekeBlockImg.naturalHeight !== 0) {
         ctx.drawImage(zekeBlockImg, x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-        ctx.strokeStyle = getRandomHexColor();
+        ctx.strokeStyle = '#00ffff';
         ctx.lineWidth = 1;
         ctx.strokeRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
       } else {
@@ -342,6 +342,7 @@
       currentPiece.shape.forEach((row, r) => {
         row.forEach((val, c) => {
           if (val && currentPiece.y + r >= 0) {
+            currentPiece.style.fillStyle = getRandomHexColor();
             board[currentPiece.y + r][currentPiece.x + c] = 1;
           }
         });
