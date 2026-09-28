@@ -304,10 +304,15 @@
       }
     }
 
+    function getRandomHexColor() {
+      return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
+    }
+
+
     function drawImageBlock(x, y) {
       if (zekeBlockImg.complete && zekeBlockImg.naturalHeight !== 0) {
         ctx.drawImage(zekeBlockImg, x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-        ctx.strokeStyle = '#ff007f';
+        ctx.strokeStyle = getRandomHexColor();
         ctx.lineWidth = 1;
         ctx.strokeRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
       } else {
