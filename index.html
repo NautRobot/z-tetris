@@ -105,64 +105,190 @@
       color: #666;
       font-size: 1.2rem;
       text-align: center;
-      line-height: 1.2;
-    }
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  color: #fff;
+}
 
-    .tetris-btn {
-      background: linear-gradient(180deg, #ff007f, #b30059);
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      margin-top: 20px;
-      border-radius: 4px;
-      font-family: 'Teko', sans-serif;
-      font-size: 1.8rem;
-      cursor: pointer;
-      text-transform: uppercase;
-      box-shadow: 0 4px 0 #660033;
-      transition: transform 0.1s, box-shadow 0.1s;
-      width: 100%;
-    }
-    .tetris-btn:active {
-      transform: translateY(4px);
-      box-shadow: 0 0 0 #660033;
-    }
+.banner {
+  width: 100%;
+  background: linear-gradient(90deg, #ff007f, #7f00ff);
+  text-align: center;
+  padding: 30px 0;
+  box-shadow: 0 6px 20px rgba(255,0,127,0.5);
+  position: relative;
+  border-bottom: none;
+}
 
-    /* Arcade trigger overlay */
-    #arcade-trigger {
-      position: fixed;
-      bottom: 15px;
-      right: 15px;
-      font-size: 28px;
-      opacity: 0.15;
-      cursor: pointer;
-      transition: opacity 0.3s;
-      z-index: 999;
-    }
-    #arcade-trigger:hover { opacity: 1; }
+.banner h1 {
+  margin: 0;
+  font-family: 'Rubik Glitch', cursive;
+  font-size: 4.5rem;
+  color: #fff;
+  letter-spacing: 4px;
+  text-shadow: 3px 3px #00ffff, -3px -3px #ff007f;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 20px;
+  box-sizing: border-box;
+  background: #1a1a1a;
+}
+
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 200px;
+}
+
+.panel-box {
+  background-color: #222;
+  border: 2px solid #00ffff;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,255,255,0.2);
+}
+
+.panel-box h3 {
+  text-align: center;
+  color: #00ffff;
+  font-family: 'Bungee Shade', cursive;
+  font-size: 1.1rem;
+  margin: 0 0 10px 0;
+  letter-spacing: normal;
+  text-transform: none;
+}
     
-    #arcade-modal {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(0, 0, 0, 0.8);
-      display: none; align-items: center; justify-content: center;
-      z-index: 1000;
-    }
-    .arcade-content {
-      background: #111;
-      border: 2px solid #ff007f;
-      border-radius: 12px;
-      padding: 20px;
-      width: 350px;
-      text-align: center;
-      font-family: sans-serif;
-    }
+.stats-text {
+  font-size: 1.8rem;
+  color: #fff;
+  margin: 0;
+  text-shadow: none;
+}
+
+.controls-hint {
+  color: #00ffff;
+  font-size: 1rem;
+  text-align: left;
+  line-height: 1.5;
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  border: 2px solid #00ffff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0,255,255,0.2);
+}
+    
+.controls-hint b {
+  color: #f1c40f;
+}
+
+canvas {
+  background: #000;
+  display: block;
+  margin: 0 auto;
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 15px rgba(0,255,255,0.3);
+  border-radius: 4px;
+}
+
+#tetrisCanvas {
+  box-shadow: 0 0 30px rgba(255,0,127,0.4);
+  border: 2px solid #ff007f;
+  background-image: none;
+}
+
+.small-canvas {
+  width: 120px;
+  height: 120px;
+}
+
+.next-canvas {
+  height: 360px;
+}
+
+.tetris-btn {
+  background-color: #ff007f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-family: sans-serif;
+  transition: background 0.2s;
+  width: 100%;
+  box-shadow: none;
+  text-transform: none;
+}
+
+.tetris-btn:hover {
+  background-color: #00ffff;
+  color: #1a1a1a;
+}
+
+.tetris-btn:active {
+  transform: none;
+}
+
+#arcade-trigger {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  font-size: 28px;
+  opacity: 0.15;
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.2s;
+  z-index: 999;
+}
+
+#arcade-trigger:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  text-shadow: 0 0 10px #ff007f;
+}
+    
+#arcade-modal {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: none; align-items: center; justify-content: center;
+  z-index: 1000;
+}
+
+.arcade-content {
+  background: #111;
+  border: 2px solid #ff007f;
+  border-radius: 12px;
+  padding: 20px;
+  width: 350px;
+  box-shadow: 0 0 30px rgba(255,0,127,0.5);
+  text-align: center;
+  font-family: sans-serif;
+}
+
   </style>
 </head>
 <body>
 
   <div class="banner">
-    <h1>Zeke's Tetris</h1>
+    <h1>Zetris</h1>
   </div>
 
   <div class="main-layout">
