@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zeke Tetris Arcade</title>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&family=Bungee+Shade&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&family=Bungee+Shade&family=Teko:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -12,144 +12,123 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      font-family: sans-serif;
+      font-family: 'Teko', sans-serif;
       overflow: hidden;
-      background-color: #1a1a1a;
+      background-color: #0d0e15;
       color: #fff;
     }
     .banner {
       width: 100%;
-      background: linear-gradient(90deg, #ff007f, #7f00ff);
+      background: linear-gradient(90deg, #1f1c2c, #928dab);
       text-align: center;
-      padding: 30px 0;
-      box-shadow: 0 6px 20px rgba(255,0,127,0.5);
+      padding: 15px 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.8);
       position: relative;
+      border-bottom: 2px solid #fff;
     }
     .banner h1 {
       margin: 0;
       font-family: 'Rubik Glitch', cursive;
-      font-size: 4.5rem;
+      font-size: 3.5rem;
       color: #fff;
-      letter-spacing: 4px;
-      text-shadow: 3px 3px #00ffff, -3px -3px #ff007f;
-    }
-
-    /* Discreet Stats Header */
-    .live-stats {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 14px;
-      color: #00ffff;
-      text-align: right;
-      font-family: monospace;
-      font-weight: bold;
-      text-shadow: 1px 1px 2px #000;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px #ff007f, -2px -2px #00ffff;
     }
 
     .main-layout {
       display: flex;
       flex: 1;
       width: 100%;
-      justify-content: space-between;
-      align-items: stretch;
-      overflow: hidden;
-    }
-    .left-sidebar, .right-sidebar {
-      width: 280px;
-      background-color: #222;
-      padding: 20px;
-      box-sizing: border-box;
-      border-left: 2px solid #333;
-      border-right: 2px solid #333;
-      overflow-y: auto;
-      height: 100%;
-    }
-    .left-sidebar h3, .right-sidebar h3 {
-      text-align: center;
-      color: #00ffff;
-      font-family: 'Bungee Shade', cursive;
-      font-size: 1.1rem;
-    }
-
-    .upgrade-box {
-      background: linear-gradient(135deg, #2c3e50, #3498db);
-      border: 2px solid #00ffff;
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 12px rgba(0,255,255,0.2);
-    }
-    .upgrade-box button {
-      background-color: #ff007f;
-      color: white;
-      border: none;
-      padding: 10px;
-      width: 100%;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: background 0.2s;
-    }
-    .upgrade-box button:hover {
-      background-color: #00ffff;
-      color: #1a1a1a;
-    }
-    .upgrade-box p {
-      margin: 8px 0 0 0;
-      font-size: 0.85rem;
-      text-align: right;
-      color: #f1c40f;
-    }
-
-    .game-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
+      gap: 30px;
       padding: 20px;
-      overflow-y: auto;
+      box-sizing: border-box;
+      background: radial-gradient(circle at center, #1a1a2e 0%, #0d0e15 100%);
     }
 
-    /* Tetris Canvas Container */
-    #tetris-wrapper {
+    /* Play.tetris.com style side panels */
+    .side-panel {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      background: #111;
-      border: 2px solid #ff007f;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 0 30px rgba(255,0,127,0.4);
-    }
-    #tetrisCanvas {
-      background: #000;
-      border: 2px solid #00ffff;
-      box-shadow: 0 0 15px rgba(0,255,255,0.3);
-      display: block;
-    }
-    .tetris-btn {
-      background-color: #ff007f;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      margin-top: 15px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.2s;
-    }
-    .tetris-btn:hover {
-      background-color: #00ffff;
-      color: #1a1a1a;
+      gap: 20px;
+      width: 160px;
     }
 
-    /* =========================================
-       DISCREET ARCADE CSS (Retained from template)
-       ========================================= */
+    .panel-box {
+      background: #151828;
+      border: 2px solid #333;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: inset 0 0 10px #000;
+    }
+    .panel-box h3 {
+      margin: 0 0 10px 0;
+      color: #888;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .stats-text {
+      font-size: 1.8rem;
+      color: #00ffff;
+      margin: 0;
+      text-shadow: 0 0 5px #00ffff;
+    }
+
+    /* Canvases */
+    canvas {
+      background: #000;
+      display: block;
+      margin: 0 auto;
+    }
+    #tetrisCanvas {
+      border: 2px solid #555;
+      background-size: 30px 30px;
+      background-image: 
+        linear-gradient(to right, #111 1px, transparent 1px),
+        linear-gradient(to bottom, #111 1px, transparent 1px);
+      box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    }
+    .small-canvas {
+      width: 120px;
+      height: 120px;
+      background: transparent;
+    }
+    .next-canvas {
+      height: 360px; /* Taller to fit 3 pieces */
+    }
+
+    .controls-hint {
+      color: #666;
+      font-size: 1.2rem;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .tetris-btn {
+      background: linear-gradient(180deg, #ff007f, #b30059);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      margin-top: 20px;
+      border-radius: 4px;
+      font-family: 'Teko', sans-serif;
+      font-size: 1.8rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      box-shadow: 0 4px 0 #660033;
+      transition: transform 0.1s, box-shadow 0.1s;
+      width: 100%;
+    }
+    .tetris-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 0 0 #660033;
+    }
+
+    /* Arcade trigger overlay */
     #arcade-trigger {
       position: fixed;
       bottom: 15px;
@@ -157,15 +136,11 @@
       font-size: 28px;
       opacity: 0.15;
       cursor: pointer;
-      transition: opacity 0.3s, transform 0.2s;
+      transition: opacity 0.3s;
       z-index: 999;
     }
-    #arcade-trigger:hover {
-      opacity: 1;
-      transform: scale(1.1);
-      text-shadow: 0 0 10px #ff007f;
-    }
-
+    #arcade-trigger:hover { opacity: 1; }
+    
     #arcade-modal {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -179,14 +154,8 @@
       border-radius: 12px;
       padding: 20px;
       width: 350px;
-      box-shadow: 0 0 30px rgba(255,0,127,0.5);
       text-align: center;
-    }
-    .arcade-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 15px;
-      border-bottom: 1px solid #333;
-      padding-bottom: 10px;
+      font-family: sans-serif;
     }
   </style>
 </head>
@@ -194,44 +163,56 @@
 
   <div class="banner">
     <h1>Zeke's Tetris</h1>
-    <div class="live-stats">
-      Score: <span id="stat-score">0</span><br>
-      Lines: <span id="stat-lines">0</span>
-    </div>
   </div>
 
   <div class="main-layout">
-    <div class="left-sidebar">
-      <h3>Controls</h3>
-      <div class="upgrade-box">
-        <p style="text-align: left; color: #00ffff;">⬅ ➡ : Move Left/Right</p>
-        <p style="text-align: left; color: #00ffff;">⬆ : Rotate Piece</p>
-        <p style="text-align: left; color: #00ffff;">⬇ : Soft Drop</p>
-         <p style="text-align: left; color: #f1c40f;">nautrobot.github.io/zmathgames (HOMEPAGE)</p>
+    
+    <!-- LEFT PANEL: Hold & Stats -->
+    <div class="side-panel">
+      <div class="panel-box">
+        <h3>Hold</h3>
+        <canvas id="holdCanvas" class="small-canvas" width="120" height="120"></canvas>
+      </div>
+      <div class="panel-box">
+        <h3>Score</h3>
+        <p class="stats-text" id="stat-score">0</p>
+      </div>
+      <div class="panel-box">
+        <h3>Level</h3>
+        <p class="stats-text" id="stat-level">1</p>
+      </div>
+      <div class="panel-box">
+        <h3>Lines</h3>
+        <p class="stats-text" id="stat-lines">0</p>
+      </div>
+      <div class="controls-hint">
+        <b>[Space]</b> Hard Drop<br>
+        <b>[C]</b> Hold<br>
+        <b>[Arrows]</b> Move / Soft Drop<br>
+        <b>[Up]</b> Rotate
       </div>
     </div>
 
-    <div class="game-container">
-      <div id="tetris-wrapper">
-        <canvas id="tetrisCanvas" width="200" height="400"></canvas>
-        <button class="tetris-btn" onclick="startTetrisGame()">Start Game</button>
+    <!-- CENTER PANEL: Game Board -->
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <canvas id="tetrisCanvas" width="300" height="600"></canvas>
+      <button class="tetris-btn" onclick="startTetrisGame()">Play Now</button>
+    </div>
+
+    <!-- RIGHT PANEL: Next Queue -->
+    <div class="side-panel">
+      <div class="panel-box" style="height: 400px;">
+        <h3>Next</h3>
+        <canvas id="nextCanvas" class="small-canvas next-canvas" width="120" height="360"></canvas>
       </div>
     </div>
 
-    <div class="right-sidebar">
-      <h3>Stats</h3>
-      <p>High Score: <span id="stat-highscore">0</span></p>
-      <p>Level: <span id="stat-level">1</span></p>
-    </div>
   </div>
 
-  <!-- Discreet Arcade Button -->
-  <div id="arcade-trigger" onclick="toggleArcade(true)" title="Arcade Info">🎮</div>
-
-  <!-- Arcade Modal -->
+  <div id="arcade-trigger" onclick="toggleArcade(true)">🎮</div>
   <div id="arcade-modal">
     <div class="arcade-content">
-      <div class="arcade-header">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;">
         <span style="color: #00ffff; font-family: 'Bungee Shade';">Zeke Arcade</span>
         <button onclick="toggleArcade(false)" style="background:none; border:none; color:#ff007f; font-size:18px; cursor:pointer;">✖</button>
       </div>
@@ -242,218 +223,335 @@
   <script>
     const canvas = document.getElementById('tetrisCanvas');
     const ctx = canvas.getContext('2d');
-    const BLOCK_SIZE = 20; 
+    const holdCanvas = document.getElementById('holdCanvas');
+    const holdCtx = holdCanvas.getContext('2d');
+    const nextCanvas = document.getElementById('nextCanvas');
+    const nextCtx = nextCanvas.getContext('2d');
+
+    const BLOCK_SIZE = 30; // 300 / 10 = 30px per block
     const ROWS = 20;
     const COLS = 10;
 
     let board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
     let tetrisInterval = null;
-    let score = 0;
-    let totalLines = 0;
-    let highscore = 0;
-    let level = 1;
-    let dropInterval = 500;
+    let score = 0, totalLines = 0, level = 1;
+    let dropInterval = 1000;
+    let isGameOver = true;
 
-    // Load Zeke image for individual block segments
-    const zekeBlockImg = new Image();
-    zekeBlockImg.src = 'zeke.jpg';
+    // Preload 7 unique Zeke images
+    const zekeImages = [];
+    for (let i = 1; i <= 7; i++) {
+        const img = new Image();
+        img.src = `zeke${i}.png`; // Zekes 1-7 for the 7 pieces
+        zekeImages.push(img);
+    }
 
+    // 7 standard Tetrominoes mapped to specific colors and specific Zeke images
     const SHAPES = [
-      [[1,1,1,1]], // I
-      [[1,1],[1,1]], // O
-      [[0,1,0],[1,1,1]], // T
-      [[1,0,0],[1,1,1]], // L
-      [[0,0,1],[1,1,1]], // J
-      [[0,1,1],[1,1,0]], // S
-      [[1,1,0],[0,1,1]]  // Z
+      { id: 1, matrix: [[0,0,0,0],[1,1,1,1],[0,0,0,0],[0,0,0,0]], color: '#00ffff', imgIndex: 0 }, // I (Cyan)
+      { id: 2, matrix: [[1,0,0],[1,1,1],[0,0,0]], color: '#0000ff', imgIndex: 1 }, // J (Blue)
+      { id: 3, matrix: [[0,0,1],[1,1,1],[0,0,0]], color: '#ff7f00', imgIndex: 2 }, // L (Orange)
+      { id: 4, matrix: [[0,1,1],[0,1,1],[0,0,0]], color: '#ffff00', imgIndex: 3 }, // O (Yellow)
+      { id: 5, matrix: [[0,1,1],[1,1,0],[0,0,0]], color: '#00ff00', imgIndex: 4 }, // S (Green)
+      { id: 6, matrix: [[0,1,0],[1,1,1],[0,0,0]], color: '#800080', imgIndex: 5 }, // T (Purple)
+      { id: 7, matrix: [[1,1,0],[0,1,1],[0,0,0]], color: '#ff0000', imgIndex: 6 }  // Z (Red)
     ];
 
     let currentPiece = null;
+    let holdPiece = null;
+    let canHold = true;
+    let bag = [];
 
-    function createPiece() {
-      const shape = SHAPES[Math.floor(Math.random() * SHAPES.length)];
-      return {
-        shape: shape,
-        x: Math.floor(COLS / 2) - Math.floor(shape[0].length / 2),
-        y: 0
-      };
+    // 7-Bag Randomizer System
+    function generateBag() {
+        let pieces = [0, 1, 2, 3, 4, 5, 6];
+        for (let i = pieces.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [pieces[i], pieces[j]] = [pieces[j], pieces[i]];
+        }
+        bag.push(...pieces);
     }
 
-    function drawBoard() {
-      ctx.fillStyle = '#000';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    function getNextPiece() {
+        if (bag.length <= 3) generateBag();
+        const typeIndex = bag.shift();
+        const shapeDef = SHAPES[typeIndex];
+        return {
+            ...shapeDef,
+            x: Math.floor(COLS / 2) - Math.floor(shapeDef.matrix[0].length / 2),
+            y: shapeDef.id === 1 ? -1 : 0 // Shift I piece up slightly to spawn nicely
+        };
+    }
 
-      // Draw locked board pieces
-      for (let r = 0; r < ROWS; r++) {
-        for (let c = 0; c < COLS; c++) {
-          if (board[r][c]) {
-            drawImageBlock(c, r);
-          }
+    function spawnNextPiece() {
+        currentPiece = getNextPiece();
+        canHold = true;
+        if (collide(currentPiece, 0, 0)) {
+            gameOver();
         }
-      }
+        drawEverything();
+    }
 
-      // Draw active falling piece
-      if (currentPiece) {
-        currentPiece.shape.forEach((row, rIdx) => {
-          row.forEach((val, cIdx) => {
-            if (val) {
-              drawImageBlock(currentPiece.x + cIdx, currentPiece.y + rIdx);
+    function drawBlock(ctx, x, y, typeId, isGhost = false, pixelScale = BLOCK_SIZE) {
+        if (typeId === 0) return;
+        const shapeDef = SHAPES[typeId - 1];
+        const img = zekeImages[shapeDef.imgIndex];
+        const px = x * pixelScale;
+        const py = y * pixelScale;
+
+        if (isGhost) {
+            ctx.fillStyle = shapeDef.color + '40'; // 25% opacity hex
+            ctx.fillRect(px, py, pixelScale, pixelScale);
+            ctx.strokeStyle = shapeDef.color;
+            ctx.lineWidth = 2;
+            ctx.strokeRect(px + 1, py + 1, pixelScale - 2, pixelScale - 2);
+        } else {
+            if (img.complete && img.naturalHeight !== 0) {
+                ctx.drawImage(img, px, py, pixelScale, pixelScale);
+                ctx.fillStyle = shapeDef.color + '40'; // slight color tint over image
+                ctx.fillRect(px, py, pixelScale, pixelScale);
+            } else {
+                ctx.fillStyle = shapeDef.color;
+                ctx.fillRect(px, py, pixelScale, pixelScale);
             }
-          });
-        });
-      }
-    }
-
-    function getRandomHexColor() {
-      return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
-    }
-
-
-    function drawImageBlock(x, y) {
-      if (zekeBlockImg.complete && zekeBlockImg.naturalHeight !== 0) {
-        ctx.drawImage(zekeBlockImg, x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-        ctx.strokeStyle = getRandomHexColor();
-        ctx.lineWidth = 1;
-        ctx.strokeRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-      } else {
-        // Fallback color block if image doesn't load
-        ctx.fillStyle = '#00ffff';
-        ctx.fillRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-        ctx.strokeStyle = '#111';
-        ctx.strokeRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-      }
-    }
-
-    function collide(piece, offsetX, offsetY) {
-      for (let r = 0; r < piece.shape.length; r++) {
-        for (let c = 0; c < piece.shape[r].length; c++) {
-          if (piece.shape[r][c]) {
-            let newX = piece.x + c + offsetX;
-            let newY = piece.y + r + offsetY;
-            if (newX < 0 || newX >= COLS || newY >= ROWS) return true;
-            if (newY >= 0 && board[newY][newX]) return true;
-          }
+            // Inner bevel effect
+            ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(px + 1, py + 1, pixelScale - 2, pixelScale - 2);
+            ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+            ctx.strokeRect(px + 2, py + 2, pixelScale - 4, pixelScale - 4);
         }
-      }
-      return false;
+    }
+
+    function drawEverything() {
+        // Clear Main Board
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw locked pieces
+        for (let r = 0; r < ROWS; r++) {
+            for (let c = 0; c < COLS; c++) {
+                drawBlock(ctx, c, r, board[r][c]);
+            }
+        }
+
+        if (currentPiece) {
+            // Calculate Ghost Y
+            let ghostY = currentPiece.y;
+            while (!collide(currentPiece, 0, ghostY - currentPiece.y + 1)) {
+                ghostY++;
+            }
+
+            // Draw Ghost Piece
+            currentPiece.matrix.forEach((row, rIdx) => {
+                row.forEach((val, cIdx) => {
+                    if (val && ghostY + rIdx >= 0) {
+                        drawBlock(ctx, currentPiece.x + cIdx, ghostY + rIdx, currentPiece.id, true);
+                    }
+                });
+            });
+
+            // Draw Active Piece
+            currentPiece.matrix.forEach((row, rIdx) => {
+                row.forEach((val, cIdx) => {
+                    if (val && currentPiece.y + rIdx >= 0) {
+                        drawBlock(ctx, currentPiece.x + cIdx, currentPiece.y + rIdx, currentPiece.id);
+                    }
+                });
+            });
+        }
+
+        // Draw Hold
+        holdCtx.clearRect(0, 0, holdCanvas.width, holdCanvas.height);
+        if (holdPiece) {
+            drawMiniPiece(holdCtx, holdPiece, 30);
+        }
+
+        // Draw Next 3
+        nextCtx.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
+        for (let i = 0; i < 3; i++) {
+            if (bag[i] !== undefined) {
+                drawMiniPiece(nextCtx, SHAPES[bag[i]], 30, i * 110);
+            }
+        }
+    }
+
+    function drawMiniPiece(context, pieceDef, size, yOffset = 0) {
+        const pMat = pieceDef.matrix;
+        const offsetX = (context.canvas.width - pMat[0].length * size) / 2;
+        const offsetY = ((120 - pMat.length * size) / 2) + yOffset; 
+        
+        pMat.forEach((row, rIdx) => {
+            row.forEach((val, cIdx) => {
+                if (val) {
+                    drawBlock(context, 0, 0, pieceDef.id, false, size);
+                    // Copy drawn block manually adjusting for offset
+                    const img = zekeImages[pieceDef.imgIndex];
+                    if(img.complete && img.naturalHeight !== 0) {
+                        context.drawImage(img, offsetX + cIdx * size, offsetY + rIdx * size, size, size);
+                        context.fillStyle = pieceDef.color + '40';
+                        context.fillRect(offsetX + cIdx * size, offsetY + rIdx * size, size, size);
+                    } else {
+                        context.fillStyle = pieceDef.color;
+                        context.fillRect(offsetX + cIdx * size, offsetY + rIdx * size, size, size);
+                    }
+                    context.strokeStyle = 'rgba(255,255,255,0.3)';
+                    context.strokeRect(offsetX + cIdx * size + 1, offsetY + rIdx * size + 1, size - 2, size - 2);
+                }
+            });
+        });
+    }
+
+    function collide(piece, offsetX, offsetY, customMatrix = null) {
+        const mat = customMatrix || piece.matrix;
+        for (let r = 0; r < mat.length; r++) {
+            for (let c = 0; c < mat[r].length; c++) {
+                if (mat[r][c]) {
+                    let newX = piece.x + c + offsetX;
+                    let newY = piece.y + r + offsetY;
+                    if (newX < 0 || newX >= COLS || newY >= ROWS) return true;
+                    if (newY >= 0 && board[newY][newX] !== 0) return true;
+                }
+            }
+        }
+        return false;
     }
 
     function mergePiece() {
-      currentPiece.shape.forEach((row, r) => {
-        row.forEach((val, c) => {
-          if (val && currentPiece.y + r >= 0) {
-            board[currentPiece.y + r][currentPiece.x + c] = 1;
-          }
+        currentPiece.matrix.forEach((row, r) => {
+            row.forEach((val, c) => {
+                if (val && currentPiece.y + r >= 0) {
+                    board[currentPiece.y + r][currentPiece.x + c] = currentPiece.id;
+                }
+            });
         });
-      });
     }
 
     function clearLines() {
-      let linesCleared = 0;
-      outer: for (let r = ROWS - 1; r >= 0; r--) {
-        for (let c = 0; c < COLS; c++) {
-          if (!board[r][c]) continue outer;
+        let linesCleared = 0;
+        for (let r = ROWS - 1; r >= 0; r--) {
+            let isFull = true;
+            for (let c = 0; c < COLS; c++) {
+                if (board[r][c] === 0) {
+                    isFull = false;
+                    break;
+                }
+            }
+            if (isFull) {
+                board.splice(r, 1);
+                board.unshift(Array(COLS).fill(0));
+                linesCleared++;
+                r++; 
+            }
         }
-        board.splice(r, 1);
-        board.unshift(Array(COLS).fill(0));
-        linesCleared++;
-        r++; 
-      }
-      if (linesCleared > 0) {
-        totalLines += linesCleared;
-        score += linesCleared * 100 * level;
-        level = Math.floor(totalLines / 5) + 1;
         
-        if (score > highscore) highscore = score;
-
-        updateStats();
-        adjustSpeed();
-      }
+        if (linesCleared > 0) {
+            totalLines += linesCleared;
+            // Standard Tetris Scoring
+            const baseScores = [0, 100, 300, 500, 800]; 
+            score += baseScores[linesCleared] * level;
+            level = Math.floor(totalLines / 10) + 1;
+            updateStats();
+            adjustSpeed();
+        }
     }
 
     function adjustSpeed() {
-      if (tetrisInterval) clearInterval(tetrisInterval);
-      dropInterval = Math.max(100, 500 - (level - 1) * 50);
-      tetrisInterval = setInterval(movePieceDown, dropInterval);
+        if (tetrisInterval) clearInterval(tetrisInterval);
+        // Standard speed curve
+        dropInterval = Math.max(100, Math.pow(0.8 - ((level - 1) * 0.007), level - 1) * 1000);
+        tetrisInterval = setInterval(movePieceDown, dropInterval);
     }
 
-    function quikDrop() {
-        let dropHeight = 0;
+    function hardDrop() {
+        let dropDistance = 0;
         while (!collide(currentPiece, 0, 1)) {
             currentPiece.y++;
-            dropHeight++;
+            dropDistance++;
         }
-    
-        mergePiece();
-        clearLines();
-        currentPiece = createPiece();
-        score += 20 * dropHeight;
-    
-        if (collide(currentPiece, 0, 0)) {
-            clearInterval(tetrisInterval);
-            tetrisInterval = null;
-            alert("Game Over! Final Score: " + score);
-            board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
-            score = 0;
-            totalLines = 0;
-            level = 1;
-            updateStats();
-        }
-    
-        drawBoard();
+        score += dropDistance * 2; // Hard drop points
+        updateStats();
+        lockPiece();
     }
 
-
-    function movePieceDown() {
-      if (!collide(currentPiece, 0, 1)) {
-        currentPiece.y++;
-      } else {
+    function lockPiece() {
         mergePiece();
         clearLines();
-        currentPiece = createPiece();
-        if (collide(currentPiece, 0, 0)) {
-          // Game Over condition
-          clearInterval(tetrisInterval);
-          tetrisInterval = null;
-          alert("Game Over! Final Score: " + score);
-          board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
-          score = 0;
-          totalLines = 0;
-          level = 1;
-          updateStats();
+        spawnNextPiece();
+    }
+
+    function movePieceDown() {
+        if (!collide(currentPiece, 0, 1)) {
+            currentPiece.y++;
+            drawEverything();
+        } else {
+            lockPiece();
         }
-      }
-      drawBoard();
+    }
+
+    function holdCurrentPiece() {
+        if (!canHold) return;
+        
+        if (holdPiece === null) {
+            holdPiece = SHAPES[currentPiece.id - 1];
+            spawnNextPiece();
+        } else {
+            let temp = SHAPES[currentPiece.id - 1];
+            currentPiece = {
+                ...holdPiece,
+                x: Math.floor(COLS / 2) - Math.floor(holdPiece.matrix[0].length / 2),
+                y: holdPiece.id === 1 ? -1 : 0
+            };
+            holdPiece = temp;
+        }
+        canHold = false;
+        drawEverything();
     }
 
     function rotatePiece() {
-      const originalShape = currentPiece.shape;
-      const rotated = currentPiece.shape[0].map((_, index) =>
-        currentPiece.shape.map(row => row[index]).reverse()
-      );
-      currentPiece.shape = rotated;
-      if (collide(currentPiece, 0, 0)) {
-        currentPiece.shape = originalShape; 
-      }
-      drawBoard();
+        if (currentPiece.id === 4) return; // Don't rotate O piece
+        
+        const mat = currentPiece.matrix;
+        const rotated = mat[0].map((_, index) => mat.map(row => row[index]).reverse());
+        
+        // Basic Wall Kick logic (try offsets if rotation fails)
+        const offsets = [{x:0, y:0}, {x:-1, y:0}, {x:1, y:0}, {x:0, y:-1}];
+        
+        for (let offset of offsets) {
+            if (!collide(currentPiece, offset.x, offset.y, rotated)) {
+                currentPiece.x += offset.x;
+                currentPiece.y += offset.y;
+                currentPiece.matrix = rotated;
+                drawEverything();
+                return;
+            }
+        }
+    }
+
+    function gameOver() {
+        clearInterval(tetrisInterval);
+        tetrisInterval = null;
+        isGameOver = true;
+        alert("Game Over! Final Score: " + score);
     }
 
     function startTetrisGame() {
-      if (tetrisInterval) clearInterval(tetrisInterval);
-      board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
-      score = 0;
-      totalLines = 0;
-      level = 1;
-      updateStats();
-      currentPiece = createPiece();
-      drawBoard();
-      tetrisInterval = setInterval(movePieceDown, dropInterval);
+        if (tetrisInterval) clearInterval(tetrisInterval);
+        board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+        score = 0;
+        totalLines = 0;
+        level = 1;
+        bag = [];
+        holdPiece = null;
+        isGameOver = false;
+        updateStats();
+        generateBag();
+        spawnNextPiece();
+        adjustSpeed();
     }
 
     function updateStats() {
       document.getElementById('stat-score').innerText = score;
       document.getElementById('stat-lines').innerText = totalLines;
-      document.getElementById('stat-highscore').innerText = highscore;
       document.getElementById('stat-level').innerText = level;
     }
 
@@ -463,71 +561,90 @@
 
     // Keyboard controls
     window.addEventListener('keydown', e => {
-      if (!tetrisInterval) return; // Don't move if game hasn't started
-      if (e.key === 'ArrowLeft' && !collide(currentPiece, -1, 0)) {
-        currentPiece.x--;
-        drawBoard();
-      } else if (e.key === 'ArrowRight' && !collide(currentPiece, 1, 0)) {
-        currentPiece.x++;
-        drawBoard();
-      } else if (e.key === 'ArrowDown') {
-        // movePieceDown();
-        quikDrop();
-      } else if (e.key === 'ArrowUp') {
-        rotatePiece();
-      }
+        if (isGameOver) return;
+        
+        switch(e.key) {
+            case 'ArrowLeft':
+                if (!collide(currentPiece, -1, 0)) {
+                    currentPiece.x--;
+                    drawEverything();
+                }
+                break;
+            case 'ArrowRight':
+                if (!collide(currentPiece, 1, 0)) {
+                    currentPiece.x++;
+                    drawEverything();
+                }
+                break;
+            case 'ArrowDown':
+                if (!collide(currentPiece, 0, 1)) {
+                    currentPiece.y++;
+                    score += 1; // Soft drop points
+                    updateStats();
+                    drawEverything();
+                }
+                break;
+            case 'ArrowUp':
+                rotatePiece();
+                break;
+            case ' ': // Spacebar
+                e.preventDefault();
+                hardDrop();
+                break;
+            case 'c':
+            case 'C':
+            case 'Shift':
+                holdCurrentPiece();
+                break;
+        }
     });
 
-    // Initial render setup
-    drawBoard();
+    // Draw empty board initially
+    drawEverything();
+
   </script>
+
   <!-- GLOBAL ZEKE POINTS TRACKER (Copy into all games) -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-  import { getDatabase, ref, runTransaction } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getDatabase, ref, runTransaction } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCyD2K3TT7hOfakFPgJ9mMjTEM8Jim9_rA",
-    authDomain: "z-clicker-97488.firebaseapp.com",
-    projectId: "z-clicker-97488",
-    storageBucket: "z-clicker-97488.firebasestorage.app",
-    messagingSenderId: "686862323992",
-    appId: "1:686862323992:web:e25c46b7deb67254278e6d",
-    databaseURL: "https://z-clicker-97488-default-rtdb.firebaseio.com" 
-  };
+    const firebaseConfig = {
+      apiKey: "AIzaSyCyD2K3TT7hOfakFPgJ9mMjTEM8Jim9_rA",
+      authDomain: "z-clicker-97488.firebaseapp.com",
+      projectId: "z-clicker-97488",
+      storageBucket: "z-clicker-97488.firebasestorage.app",
+      messagingSenderId: "686862323992",
+      appId: "1:686862323992:web:e25c46b7deb67254278e6d",
+      databaseURL: "https://z-clicker-97488-default-rtdb.firebaseio.com" 
+    };
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getDatabase(app);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
 
-  signInAnonymously(auth).catch(console.error);
+    signInAnonymously(auth).catch(console.error);
 
-  onAuthStateChanged(auth, (user) => {
-    if (!user) return;
+    onAuthStateChanged(auth, (user) => {
+      if (!user) return;
 
-    let activeSeconds = 0;
+      let activeSeconds = 0;
 
-    // Tick every second if the user is actively viewing the tab
-    setInterval(() => {
-      if (!document.hidden) {
-        activeSeconds++;
-
-        // Every 60 seconds of active play, give 1 point
-        if (activeSeconds >= 60) {
-          activeSeconds = 0;
-          const userPointsRef = ref(db, `users/${user.uid}/zekePoints`);
-          
-          runTransaction(userPointsRef, (currentPoints) => {
-            return (currentPoints || 0) + 1;
-          }).then(() => {
-            console.log("+1 Global Zeke Point awarded for time spent!");
-          });
+      setInterval(() => {
+        if (!document.hidden) {
+          activeSeconds++;
+          if (activeSeconds >= 60) {
+            activeSeconds = 0;
+            const userPointsRef = ref(db, `users/${user.uid}/zekePoints`);
+            
+            runTransaction(userPointsRef, (currentPoints) => {
+              return (currentPoints || 0) + 1;
+            });
+          }
         }
-      }
-    }, 1000);
-  });
-</script>
-  
+      }, 1000);
+    });
+  </script>
 </body>
 </html>
